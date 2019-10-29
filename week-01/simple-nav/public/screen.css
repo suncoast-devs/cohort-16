@@ -1,0 +1,40 @@
+:root {
+  font: 16px / 1 sans-serif;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100%;
+  background-color: lightgray;
+}
+
+nav {
+  background-color: aqua;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+}
+
+li {
+  padding: 2rem;
+  border: 3px dotted pink;
+}
+
+header {
+  padding: 1rem;
+  font-size: 2rem;
+}
+
+main {
+  padding: 1.25rem;
+}
