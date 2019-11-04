@@ -18,9 +18,15 @@ const calculateTip = () => {
   console.log(twentyPercentTip)
 
   // display the tip amounts
-  document.querySelector('.fifteen-percent').textContent = fifteenPercentTip
-  document.querySelector('.eighteen-percent').textContent = eighteenPercentTip
-  document.querySelector('.twenty-percent').textContent = twentyPercentTip
+  document.querySelector(
+    '.fifteen-percent'
+  ).textContent = fifteenPercentTip.toFixed(2)
+  document.querySelector(
+    '.eighteen-percent'
+  ).textContent = eighteenPercentTip.toFixed(2)
+  document.querySelector(
+    '.twenty-percent'
+  ).textContent = twentyPercentTip.toFixed(2)
 }
 
 document.addEventListener('DOMContentLoaded', main)
