@@ -13,16 +13,30 @@ const ranks = [
   'Queen',
   'King'
 ]
+// getting values as a parallel array
+// const values = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
 const suits = ['Spades', 'Diamonds', 'Clubs', 'Hearts']
 
 const deck = []
+
+// get values using a if statement
+const getCardValue = rank => {
+  if (rank === 'Ace') {
+    return 11
+  } else if (rank === 'King' || rank === 'Queen' || rank === 'Jack') {
+    return 10
+  } else {
+    return parseInt(rank)
+  }
+}
 
 const main = () => {
   for (let i = 0; i < suits.length; i++) {
     for (let j = 0; j < ranks.length; j++) {
       const card = {
         rank: ranks[j],
-        suit: suits[i]
+        suit: suits[i],
+        value: getCardValue(ranks[j])
       }
       deck.push(card)
     }
