@@ -18,6 +18,7 @@ const ranks = [
 const suits = ['Spades', 'Diamonds', 'Clubs', 'Hearts']
 
 const deck = []
+const playerHand = []
 
 // get values using a if statement
 const getCardValue = rank => {
@@ -52,8 +53,17 @@ const main = () => {
 
 const dealACard = () => {
   // document.querySelector('.player-hand').textContent = deck[0]
-  document.querySelector('.player-hand').textContent =
-    'You drew the ' + deck[0].rank + ' of ' + deck[0].suit
+  const drawnCard = deck.pop()
+  playerHand.push(drawnCard)
+  const cardLi = document.createElement('li')
+  cardLi.textContent = drawnCard.rank + ' of ' + drawnCard.suit
+  document.querySelector('.player-hand').appendChild(cardLi)
+
+  let sum = 0
+  for (let i = 0; i < playerHand.length; i++) {
+    sum += playerHand[i].value
+  }
+  document.querySelector('.player-sum').textContent = sum
 }
 document.addEventListener('DOMContentLoaded', main)
 document.querySelector('button').addEventListener('click', dealACard)
