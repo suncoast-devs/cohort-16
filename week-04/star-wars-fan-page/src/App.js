@@ -4,6 +4,8 @@ import obiWanPicture from './images/obi-wan.jpeg'
 import ackarPicture from './images/ackbar.jpeg'
 import chewie from './images/chewie.jpeg'
 
+import Character from './components/Character'
+
 const App = () => {
   return (
     <>
@@ -12,21 +14,17 @@ const App = () => {
       </header>
       <main>
         <ul>
-          <li>
-            <img src={obiWanPicture} />
-            <h2>Obi-wan</h2>
-            <p>Use the force!</p>
-          </li>
-          <li>
-            <img src={chewie} />
-            <h2>Chewie</h2>
-            <p>Raaarrrrrr rarrrr!</p>
-          </li>
-          <li>
-            <img src={ackarPicture} />
-            <h2>Ackbar</h2>
-            <p>It's a trap!</p>
-          </li>
+          <Character
+            image={obiWanPicture}
+            name="Obi-wan"
+            tagline="Use the force"
+          />
+          <Character
+            image={chewie}
+            name="Chewie"
+            tagline="Raaarrrrrr rarrrr!"
+          />
+          <Character image={ackarPicture} name="Ackbar" tagline="Its a trap" />
         </ul>
       </main>
     </>
