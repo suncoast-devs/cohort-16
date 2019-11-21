@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import Movie from './components/Movie'
 
 const App = () => {
   const [movies, setMovies] = useState([])
@@ -33,19 +34,7 @@ const App = () => {
       <main>
         <ul>
           {movies.map((movie, index) => {
-            return (
-              <li key={index}>
-                <img src="" alt="" />
-                <header>{movie.title}</header>
-                <p>
-                  Overview - Lorem ipsum dolor, sit amet consectetur adipisicing
-                  elit. Explicabo molestias corporis et ex! Cum animi impedit
-                  dicta fugit non corrupti dolore quod tempore. Laboriosam
-                  incidunt beatae amet libero repudiandae debitis!
-                </p>
-                <p>{movie.release_date}</p>
-              </li>
-            )
+            return <Movie key={index} movie={movie} />
           })}
         </ul>
       </main>
