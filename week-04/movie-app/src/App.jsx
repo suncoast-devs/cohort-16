@@ -9,7 +9,18 @@ const App = () => {
       'https://api.themoviedb.org/3/discover/movie?primary_release_year=1989&sort_by=popularity.desc&api_key=2b39f89969ae6ac7cc55346160e79f11'
     )
     console.log(resp)
-    setMovies(resp.data.results)
+    // (a, b) => a.release_date - b.release_date))
+    setMovies(
+      resp.data.results.sort((a, b) => {
+        if (a.release_date > b.release_date) {
+          return 1
+        } else if (a.release_date < b.release_date) {
+          return -1
+        } else {
+          return 0
+        }
+      })
+    )
   }
 
   useEffect(() => {
@@ -32,7 +43,7 @@ const App = () => {
                   dicta fugit non corrupti dolore quod tempore. Laboriosam
                   incidunt beatae amet libero repudiandae debitis!
                 </p>
-                <p>11/21/1989</p>
+                <p>{movie.release_date}</p>
               </li>
             )
           })}
