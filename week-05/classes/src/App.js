@@ -1,8 +1,12 @@
 import React, { Component } from 'react'
-import HelloWorld from './components/HelloWorld'
+import CounterWithClass from './components/CounterWithClass'
 
 const App = () => {
-  return <HelloWorld />
+  return (
+    <>
+      <CounterWithClass />
+    </>
+  )
 }
 
 export default App
