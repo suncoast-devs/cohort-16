@@ -10,3 +10,15 @@ body {
   margin: 0;
   min-height: 100%;
 }
+
+td {
+  border: 3px dashed hotpink;
+  height: 1rem;
+  width: 1rem;
+  background-color: indigo;
+  color: whitesmoke;
+}
+
+table {
+  border-spacing: 0;
+}

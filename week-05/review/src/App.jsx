@@ -4,6 +4,7 @@ import Page from './pages/Page'
 import Page2 from './pages/Page2'
 import HomePage from './pages/HomePage'
 import NotFound from './pages/NotFound'
+import Minesweeper from './pages/Minesweeper'
 
 const App = () => {
   return (
@@ -16,18 +17,14 @@ const App = () => {
               <Link to="/">Go Home</Link>
             </li>
             <li>
-              <Link to="/1">Page 1</Link>
-            </li>
-            <li>
-              <Link to="/2">Page 2</Link>
+              <Link to="/minesweeper">Minesweeper</Link>
             </li>
           </ul>
         </nav>
       </header>
       <Switch>
         <Route exact path="/" component={HomePage}></Route>
-        <Route exact path="/1" component={Page}></Route>
-        <Route exact path="/2" component={Page2}></Route>
+        <Route exact path="/minesweeper" component={Minesweeper}></Route>
         <Route path="*" component={NotFound}></Route>
       </Switch>
     </Router>
