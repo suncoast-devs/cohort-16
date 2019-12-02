@@ -23,8 +23,6 @@ const HomePage = () => {
   const letters = 'abcdefghijklmnopqrstuvwxyz'.split('')
   const letterClicked = letter => {
     console.log(letter)
-    // check if the letter is in the selectedWord
-    // if yes then show it
     if (!(selectedWord.indexOf(letter) >= 0)) {
       setStrikes(prev => {
         return prev > 0 ? prev - 1 : prev
@@ -32,6 +30,26 @@ const HomePage = () => {
     }
 
     if (!lettersGuessed.includes(letter)) {
+      // check to see if the word was guessed
+      let numberOfCorrectGuesses = 0
+      selectedWord.split('').forEach(letter => {
+        if (lettersGuessed.includes(letter)) {
+          numberOfCorrectGuesses++
+        }
+      })
+      // // using reduce as well,
+      // const numberOfCorrectGuessesReduced = selectedWord
+      //   .split('')
+      //   .reduce((acc, letter) => {
+      //     if (lettersGuessed.includes(letter)) {
+      //       acc++
+      //     }
+      //     return acc
+      //   })
+
+      if (numberOfCorrectGuesses === selectedWord.length) {
+        setGameStatus('won')
+      }
       setLettersGuessed([...lettersGuessed, letter])
     }
   }
