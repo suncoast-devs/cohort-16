@@ -27,7 +27,7 @@ const HomePage = () => {
     // if yes then show it
     if (!(selectedWord.indexOf(letter) >= 0)) {
       setStrikes(prev => {
-        return prev - 1
+        return prev > 0 ? prev - 1 : prev
       })
     }
 
@@ -75,7 +75,9 @@ const HomePage = () => {
               <li key={letter}>
                 <button
                   onClick={() => letterClicked(letter)}
-                  disabled={lettersGuessed.includes(letter)}
+                  disabled={
+                    lettersGuessed.includes(letter) || gameStatus === 'lost'
+                  }
                 >
                   {letter.toUpperCase()}
                 </button>
