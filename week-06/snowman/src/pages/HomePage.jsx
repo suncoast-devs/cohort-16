@@ -5,6 +5,8 @@ const HomePage = () => {
   const [selectedWord, setSelectedWord] = useState('apple')
   // words[Math.floor(Math.random() * words.length)]
 
+  const [strikes, setStrikes] = useState(7)
+
   const [lettersGuessed, setLettersGuessed] = useState([])
 
   const letters = 'abcdefghijklmnopqrstuvwxyz'.split('')
@@ -12,16 +14,20 @@ const HomePage = () => {
     console.log(letter)
     // check if the letter is in the selectedWord
     // if yes then show it
-    if (selectedWord.indexOf(letter) >= 0) {
-      console.log(selectedWord, 'contains', letter)
+    if (!(selectedWord.indexOf(letter) >= 0)) {
+      setStrikes(prev => {
+        return prev - 1
+      })
     }
 
-    // always add the letter to the letters guessed
-    setLettersGuessed([...lettersGuessed, letter])
+    if (!lettersGuessed.includes(letter)) {
+      setLettersGuessed([...lettersGuessed, letter])
+    }
   }
 
   return (
     <main>
+      <section>{strikes}</section>
       <img src="" alt="snowman" />
       <section>
         <ul>
@@ -47,7 +53,10 @@ const HomePage = () => {
           {letters.map(letter => {
             return (
               <li key={letter}>
-                <button onClick={() => letterClicked(letter)}>
+                <button
+                  onClick={() => letterClicked(letter)}
+                  disabled={lettersGuessed.includes(letter)}
+                >
                   {letter.toUpperCase()}
                 </button>
               </li>
