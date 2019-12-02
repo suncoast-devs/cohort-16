@@ -4,6 +4,7 @@ import KeyboardEventHandler from 'react-keyboard-event-handler'
 import words from '../data/words.json'
 
 import Snowman from '../components/Snowman'
+import SelectedWordDisplay from '../components/SelectedWordDisplay.jsx'
 
 const HomePage = () => {
   const [selectedWord, setSelectedWord] = useState('apple')
@@ -15,7 +16,6 @@ const HomePage = () => {
 
   const letters = 'abcdefghijklmnopqrstuvwxyz'.split('')
   const letterClicked = letter => {
-    console.log(letter)
     if (!(selectedWord.indexOf(letter) >= 0)) {
       setStrikes(prev => {
         return prev > 0 ? prev - 1 : prev
@@ -62,21 +62,16 @@ const HomePage = () => {
       <KeyboardEventHandler
         handleKeys={letters}
         onKeyEvent={(key, e) => {
-          console.log(`do something upon keydown event of ${key}`)
           letterClicked(key)
         }}
       />
       <Snowman bananas={strikes} />
       <section>
-        <ul>
-          {selectedWord.split('').map((letter, index) => {
-            if (lettersGuessed.includes(letter) || gameStatus === 'lost') {
-              return <li key={index}>{letter}</li>
-            } else {
-              return <li key={index}>_</li>
-            }
-          })}
-        </ul>
+        <SelectedWordDisplay
+          selectedWord={selectedWord}
+          gameStatus={gameStatus}
+          lettersGuessed={lettersGuessed}
+        />
         {gameStatus === 'lost' && (
           <section>The word was {selectedWord}</section>
         )}
