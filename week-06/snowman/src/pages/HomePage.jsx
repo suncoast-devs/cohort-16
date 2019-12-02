@@ -5,6 +5,7 @@ import words from '../data/words.json'
 
 import Snowman from '../components/Snowman'
 import SelectedWordDisplay from '../components/SelectedWordDisplay.jsx'
+import LetterButton from '../components/LetterButton.jsx'
 
 const HomePage = () => {
   const [selectedWord, setSelectedWord] = useState('apple')
@@ -89,14 +90,12 @@ const HomePage = () => {
           {letters.map(letter => {
             return (
               <li key={letter}>
-                <button
-                  onClick={() => letterClicked(letter)}
-                  disabled={
-                    lettersGuessed.includes(letter) || gameStatus === 'lost'
-                  }
-                >
-                  {letter.toUpperCase()}
-                </button>
+                <LetterButton
+                  handleButtonClick={letterClicked}
+                  letter={letter}
+                  gameStatus={gameStatus}
+                  lettersGuessed={lettersGuessed}
+                />
               </li>
             )
           })}
