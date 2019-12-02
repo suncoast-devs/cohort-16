@@ -1,16 +1,23 @@
-import React from 'react'
+import React, { useState } from 'react'
 import words from '../data/words.json'
 
 const HomePage = () => {
-  console.log(words)
+  const [selectedWord, setSelectedWord] = useState('apple')
+  // words[Math.floor(Math.random() * words.length)]
 
-  const [selectedWord, setSelectedWord] = useState(
-    words[Math.floor(Math.random() * words.length)]
-  )
+  const [lettersGuessed, setLettersGuessed] = useState([])
 
   const letters = 'abcdefghijklmnopqrstuvwxyz'.split('')
   const letterClicked = letter => {
     console.log(letter)
+    // check if the letter is in the selectedWord
+    // if yes then show it
+    if (selectedWord.indexOf(letter) >= 0) {
+      console.log(selectedWord, 'contains', letter)
+    }
+
+    // always add the letter to the letters guessed
+    setLettersGuessed([...lettersGuessed, letter])
   }
 
   return (
@@ -18,22 +25,21 @@ const HomePage = () => {
       <img src="" alt="snowman" />
       <section>
         <ul>
-          <li>_</li>
-          <li>_</li>
-          <li>_</li>
-          <li>_</li>
-          <li>_</li>
-          <li>_</li>
-          <li>_</li>
+          {selectedWord.split('').map((letter, index) => {
+            if (lettersGuessed.includes(letter)) {
+              return <li key={index}>{letter}</li>
+            } else {
+              return <li key={index}>_</li>
+            }
+          })}
         </ul>
       </section>
       <section>
         <header>guessed letters: </header>
         <ul>
-          <li>a</li>
-          <li>b</li>
-          <li>c</li>
-          <li>d</li>
+          {lettersGuessed.map(letter => {
+            return <li key={letter}>{letter}</li>
+          })}
         </ul>
       </section>
       <section>
