@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react'
+import KeyboardEventHandler from 'react-keyboard-event-handler'
+
 import words from '../data/words.json'
 
 import step0 from '../images/step_0.png'
@@ -60,8 +62,19 @@ const HomePage = () => {
     }
   }, [strikes])
 
+  useEffect(() => {
+    // find the body/#root, attach an event
+  }, [])
+
   return (
     <main>
+      <KeyboardEventHandler
+        handleKeys={letters}
+        onKeyEvent={(key, e) => {
+          console.log(`do something upon keydown event of ${key}`)
+          letterClicked(key)
+        }}
+      />
       <section>{strikes}</section>
       <img src={images[strikes]} alt="snowman" />
       <section>
