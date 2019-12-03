@@ -61,15 +61,15 @@ const Calculator = () => {
         <button className="operator-button">/</button>
       </section>
       <section className="button-row">
-        <button>7</button>
-        <button>8</button>
-        <button>9</button>
+        <button onClick={() => numberButtonPressed(7)}>7</button>
+        <button onClick={() => numberButtonPressed(8)}>8</button>
+        <button onClick={() => numberButtonPressed(9)}>9</button>
         <button className="operator-button">*</button>
       </section>
       <section className="button-row">
-        <button>4</button>
-        <button>5</button>
-        <button>6</button>
+        <button onClick={() => numberButtonPressed(4)}>4</button>
+        <button onClick={() => numberButtonPressed(5)}>5</button>
+        <button onClick={() => numberButtonPressed(6)}>6</button>
         <button className="operator-button">-</button>
       </section>
       <section className="button-row">
