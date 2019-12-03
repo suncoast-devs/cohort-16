@@ -4,8 +4,8 @@ const Calculator = () => {
   const [display, setDisplay] = useState('')
   const [operand, setOperand] = useState('')
   const [firstNumber, setFirstNumber] = useState(0)
-  const [runningTotal, setRunningTotal] = useState(0)
   const [clearOnNextClick, setClearOnNextClick] = useState(false)
+
   const numberButtonPressed = digit => {
     console.log(digit, 'was pressed')
     setDisplay(prevValue => {
@@ -24,15 +24,11 @@ const Calculator = () => {
     // storing the current of the display in its own state
     setFirstNumber(display)
     setClearOnNextClick(true)
-    // reseting the dislay
-    const rt = getResult(op)
-    console.log({ rt })
-    setRunningTotal(rt)
   }
 
   const getResult = operand => {
-    let total = runningTotal
-    console.log({ total, display, operand })
+    let total = parseInt(firstNumber)
+    console.log({ total, operand, display })
     switch (operand) {
       case '+':
         // add the numbers
@@ -58,7 +54,6 @@ const Calculator = () => {
     let total = getResult(operand)
     console.log({ total })
     setDisplay(total)
-    setRunningTotal(total)
     // total = firstNumber (operand) display
   }
 
