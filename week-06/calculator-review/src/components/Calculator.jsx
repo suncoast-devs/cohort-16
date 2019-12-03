@@ -4,10 +4,17 @@ const Calculator = () => {
   const [display, setDisplay] = useState('')
   const [operand, setOperand] = useState('')
   const [firstNumber, setFirstNumber] = useState(0)
+  const [runningTotal, setRunningTotal] = useState(0)
+  const [clearOnNextClick, setClearOnNextClick] = useState(false)
   const numberButtonPressed = digit => {
     console.log(digit, 'was pressed')
     setDisplay(prevValue => {
-      return prevValue + digit.toString()
+      if (clearOnNextClick) {
+        setClearOnNextClick(false)
+        return digit.toString()
+      } else {
+        return prevValue + digit.toString()
+      }
     })
   }
 
@@ -16,41 +23,42 @@ const Calculator = () => {
     setOperand(op)
     // storing the current of the display in its own state
     setFirstNumber(display)
+    setClearOnNextClick(true)
     // reseting the dislay
-    setDisplay('')
+    const rt = getResult(op)
+    console.log({ rt })
+    setRunningTotal(rt)
   }
 
-  const calculateResult = () => {
-    // // based on the operand,
-    // if (operand === '+') {
-    //   // add the numbers
-    // } else if (operand === '-') {
-    //   // subtract the numbers
-    // } else if (operand === '*') {
-    //   // multiply the numbers
-    // } else if (operand === '/') {
-    //   // divide the numbers
-    // }
-    let total = 0
+  const getResult = operand => {
+    let total = runningTotal
+    console.log({ total, display, operand })
     switch (operand) {
       case '+':
         // add the numbers
-        total = parseInt(firstNumber) + parseInt(display)
+        total += parseInt(display)
         break
       case '-':
         // substract the numbers
-        total = parseInt(firstNumber) - parseInt(display)
+        total -= parseInt(display)
         break
       case '*':
         // mult the numbers
-        total = parseInt(firstNumber) * parseInt(display)
+        total *= parseInt(display)
         break
       case '/':
         // divide the numbers
-        total = parseInt(firstNumber) / parseInt(display)
+        total /= parseInt(display)
         break
     }
+    return total
+  }
+
+  const calculateResult = () => {
+    let total = getResult(operand)
+    console.log({ total })
     setDisplay(total)
+    setRunningTotal(total)
     // total = firstNumber (operand) display
   }
 
