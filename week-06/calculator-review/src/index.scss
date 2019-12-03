@@ -59,8 +59,12 @@ main.calculator {
     background-color: rgb(65, 49, 43);
     color: rgb(104, 103, 103);
   }
-  .button-row > .clear-button {
+  .button-row > .zero,
+  .button-row > .equals {
     width: 50%;
+  }
+  .button-row > .clear-button {
+    width: 75%;
     background-color: rgb(182, 255, 47);
   }
   .button-row > .operator-button {
