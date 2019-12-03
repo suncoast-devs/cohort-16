@@ -39,12 +39,15 @@ const Calculator = () => {
         break
       case '-':
         // substract the numbers
+        total = parseInt(firstNumber) - parseInt(display)
         break
       case '*':
         // mult the numbers
+        total = parseInt(firstNumber) * parseInt(display)
         break
       case '/':
         // divide the numbers
+        total = parseInt(firstNumber) / parseInt(display)
         break
     }
     setDisplay(total)
@@ -58,19 +61,34 @@ const Calculator = () => {
       </section>
       <section className="button-row">
         <button className="clear-button">clear</button>
-        <button className="operator-button">/</button>
+        <button
+          className="operator-button"
+          onClick={() => operandButtonPressed('/')}
+        >
+          /
+        </button>
       </section>
       <section className="button-row">
         <button onClick={() => numberButtonPressed(7)}>7</button>
         <button onClick={() => numberButtonPressed(8)}>8</button>
         <button onClick={() => numberButtonPressed(9)}>9</button>
-        <button className="operator-button">*</button>
+        <button
+          className="operator-button"
+          onClick={() => operandButtonPressed('*')}
+        >
+          *
+        </button>
       </section>
       <section className="button-row">
         <button onClick={() => numberButtonPressed(4)}>4</button>
         <button onClick={() => numberButtonPressed(5)}>5</button>
         <button onClick={() => numberButtonPressed(6)}>6</button>
-        <button className="operator-button">-</button>
+        <button
+          className="operator-button"
+          onClick={() => operandButtonPressed('-')}
+        >
+          -
+        </button>
       </section>
       <section className="button-row">
         <button onClick={() => numberButtonPressed(1)}>1</button>
