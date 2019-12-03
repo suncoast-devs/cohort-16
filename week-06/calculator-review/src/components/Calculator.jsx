@@ -2,12 +2,22 @@ import React, { useState } from 'react'
 
 const Calculator = () => {
   const [display, setDisplay] = useState('')
-
+  const [operand, setOperand] = useState('')
+  const [firstNumber, setFirstNumber] = useState(0)
   const numberButtonPressed = digit => {
     console.log(digit, 'was pressed')
     setDisplay(prevValue => {
       return prevValue + digit.toString()
     })
+  }
+
+  const operandButtonPressed = op => {
+    console.log(op, 'was pressed')
+    setOperand(op)
+    // storing the current of the display in its own state
+    setFirstNumber(display)
+    // reseting the dislay
+    setDisplay('')
   }
 
   return (
@@ -35,7 +45,12 @@ const Calculator = () => {
         <button onClick={() => numberButtonPressed(1)}>1</button>
         <button onClick={() => numberButtonPressed(2)}>2</button>
         <button onClick={() => numberButtonPressed(3)}>3</button>
-        <button className="operator-button">+</button>
+        <button
+          className="operator-button"
+          onClick={() => operandButtonPressed('+')}
+        >
+          +
+        </button>
       </section>
       <section className="button-row">
         <button className="zero" onClick={() => numberButtonPressed(0)}>
