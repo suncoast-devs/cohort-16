@@ -54,13 +54,21 @@ const Calculator = () => {
     // total = firstNumber (operand) display
   }
 
+  const clearButton = () => {
+    setDisplay('')
+    setFirstNumber(0)
+    setOperand('')
+  }
+
   return (
     <main className="calculator">
       <section className="display">
         <p>{display}</p>
       </section>
       <section className="button-row">
-        <button className="clear-button">clear</button>
+        <button className="clear-button" onClick={clearButton}>
+          clear
+        </button>
         <button
           className="operator-button"
           onClick={() => operandButtonPressed('/')}
