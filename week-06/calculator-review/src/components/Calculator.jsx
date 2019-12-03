@@ -20,6 +20,37 @@ const Calculator = () => {
     setDisplay('')
   }
 
+  const calculateResult = () => {
+    // // based on the operand,
+    // if (operand === '+') {
+    //   // add the numbers
+    // } else if (operand === '-') {
+    //   // subtract the numbers
+    // } else if (operand === '*') {
+    //   // multiply the numbers
+    // } else if (operand === '/') {
+    //   // divide the numbers
+    // }
+    let total = 0
+    switch (operand) {
+      case '+':
+        // add the numbers
+        total = parseInt(firstNumber) + parseInt(display)
+        break
+      case '-':
+        // substract the numbers
+        break
+      case '*':
+        // mult the numbers
+        break
+      case '/':
+        // divide the numbers
+        break
+    }
+    setDisplay(total)
+    // total = firstNumber (operand) display
+  }
+
   return (
     <main className="calculator">
       <section className="display">
@@ -57,7 +88,9 @@ const Calculator = () => {
           0
         </button>
 
-        <button className="operator-button equals">=</button>
+        <button className="operator-button equals" onClick={calculateResult}>
+          =
+        </button>
       </section>
     </main>
   )
