@@ -1,13 +1,46 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { userInfo } from 'os'
+import { calculate } from 'specificity'
 
 const Calculator = () => {
-  const [display, setDisplay] = useState('')
   const [operand, setOperand] = useState('')
-  const [firstNumber, setFirstNumber] = useState(0)
-  const [clearOnNextClick, setClearOnNextClick] = useState(false)
+  const [display, setDisplay] = useState(0)
+  const [runningTotal, setRunningTotal] = useState(0)
+  const [clearOnNextClick, setClearOnNextClick] = useState(true)
+  const [shouldRunCalc, setShouldRunCalc] = useState(false)
+  const clearButton = () => {
+    setDisplay('')
+    setOperand('')
+    setRunningTotal(0)
+    setClearOnNextClick(true)
+  }
+
+  const getResult = (a, op, b) => {
+    let total = parseInt(a)
+    switch (op) {
+      case '+':
+        // add the numbers
+        total += b
+        break
+      case '-':
+        // substract the numbers
+        total -= b
+        break
+      case '*':
+        // mult the numbers
+        total *= b
+        break
+      case '/':
+        // divide the numbers
+        total /= b
+        break
+      default:
+        break
+    }
+    return total
+  }
 
   const numberButtonPressed = digit => {
-    console.log(digit, 'was pressed')
     setDisplay(prevValue => {
       if (clearOnNextClick) {
         setClearOnNextClick(false)
@@ -17,54 +50,24 @@ const Calculator = () => {
       }
     })
   }
-
   const operandButtonPressed = op => {
-    console.log(op, 'was pressed')
     setOperand(op)
     // storing the current of the display in its own state
-    setFirstNumber(display)
     setClearOnNextClick(true)
+    setRunningTotal(display)
   }
-
-  const getResult = operand => {
-    let total = parseInt(firstNumber)
-    console.log({ total, operand, display })
-    switch (operand) {
-      case '+':
-        // add the numbers
-        total += parseInt(display)
-        break
-      case '-':
-        // substract the numbers
-        total -= parseInt(display)
-        break
-      case '*':
-        // mult the numbers
-        total *= parseInt(display)
-        break
-      case '/':
-        // divide the numbers
-        total /= parseInt(display)
-        break
-    }
-    return total
+  const calculate = () => {
+    console.log({ runningTotal, operand, display })
+    const total = getResult(runningTotal, operand, display)
+    setRunningTotal(total)
   }
-
-  const calculateResult = () => {
-    let total = getResult(operand)
-    console.log({ total })
-    setDisplay(total)
-    // total = firstNumber (operand) display
-  }
-
-  const clearButton = () => {
-    setDisplay('')
-    setFirstNumber(0)
-    setOperand('')
-  }
+  useEffect(() => {
+    calculate()
+  }, [shouldRunCalc])
 
   return (
     <main className="calculator">
+      <em>{runningTotal}</em> <em>{operand}</em>
       <section className="display">
         <p>{display}</p>
       </section>
@@ -117,7 +120,10 @@ const Calculator = () => {
           0
         </button>
 
-        <button className="operator-button equals" onClick={calculateResult}>
+        <button
+          className="operator-button equals"
+          onClick={() => setShouldRunCalc(p => !p)}
+        >
           =
         </button>
       </section>
