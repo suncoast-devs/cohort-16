@@ -1,8 +1,8 @@
 import React from 'react'
-import HelloWorld from '../components/HelloWorld'
+import TipCalculator from '../components/TipCalculator'
 
 const HomePage = () => {
-  return <HelloWorld />
+  return <TipCalculator />
 }
 
 export default HomePage
