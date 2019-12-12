@@ -41,7 +41,6 @@ namespace CryptidTracker
       Console.WriteLine("I don't understand that, try again");
     }
 
-
     static void SearchForCreature()
     {
       Console.WriteLine("What are you searhing for?");
@@ -65,6 +64,15 @@ namespace CryptidTracker
       }
     }
 
+    static void UpdateCreatureSighting()
+    {
+      Console.WriteLine("What do you see again?");
+      var creatureName = Console.ReadLine();
+      var seenCreature = CreatureSightings
+        .FirstOrDefault(creature => creature.Name.ToLower() == creatureName.ToLower());
+      seenCreature.NumberOfSightings++;
+      seenCreature.DateOfLastSighting = DateTime.UtcNow;
+    }
 
     static void Main(string[] args)
     {
@@ -73,11 +81,15 @@ namespace CryptidTracker
       while (input != "quit")
       {
         Console.WriteLine("What would you like to do?");
-        Console.WriteLine("Available commands are: add, view, search,  quit");
+        Console.WriteLine("Available commands are: add, view, search, update, quit");
         input = Console.ReadLine().ToLower();
         if (input == "add")
         {
           AddCreature();
+        }
+        else if (input == "update")
+        {
+          UpdateCreatureSighting();
         }
         else if (input == "search")
         {
