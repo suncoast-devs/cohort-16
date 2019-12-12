@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace HelloWorld
 {
@@ -41,8 +42,12 @@ namespace HelloWorld
       int x = 3;
       long y = 2332222222222;
       double z = 2.3;
-      float a = 3.45;
-      decimal b = 5.8;
+      float a = 3.45f;
+      decimal b = 5.8m;
+
+      b = (decimal)a;
+
+
 
       char c = 'r';
 
@@ -90,10 +95,49 @@ namespace HelloWorld
       // functions, calling and defining
       var greeting = GetGreeting("Jeffery");
 
+      // arrays   
+      // const scores = []
+      var scores = new int[10];
 
+      scores[1] = 12;
 
-      // objects
+      for (int i = 0; i < scores.Length; i++)
+      {
+        Console.WriteLine(scores[i]);
+      }
+
+      // scores[11] = 34;
+
+      // List
+
       // arrays (data structures)
+      var names = new List<string>();
+      var moreScores = new List<int>();
+      var gpas = new List<double>();
+
+      names.Add("nolan");
+      names.Add("Chris");
+      names.Add("Amanda");
+
+      Console.WriteLine(names[2]);
+      Console.WriteLine(names);
+      foreach (var n in names)
+      {
+        Console.WriteLine(n);
+      }
+
+      var guess = Math.Round(99d / 2);
+      Console.WriteLine(guess);
+      // objects
+
+      var fido = new Dog();
+
+      fido.TailLength = 3.5;
+      fido.Temperament = "Awesome";
+      fido.Fur = "Yes";
+      // fido.Breed = "Poodle";
+      fido.UpdateBreed("pug");
+
       // map/filter/reduce
 
       // libraries/pacakges
