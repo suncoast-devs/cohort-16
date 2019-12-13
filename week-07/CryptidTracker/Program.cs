@@ -7,7 +7,6 @@ namespace CryptidTracker
   class Program
   {
 
-    static List<Cryptid> CreatureSightings = new List<Cryptid>();
 
     static void AddCreature()
     {
@@ -16,14 +15,7 @@ namespace CryptidTracker
       var creatureName = Console.ReadLine();
       Console.WriteLine("Where ????");
       var location = Console.ReadLine();
-
-      var creature = new Cryptid();
-      creature.Name = creatureName;
-      creature.LastSightedAt = location;
-      creature.DateOfLastSighting = DateTime.Now;
-      creature.NumberOfSightings = 1;
-
-      CreatureSightings.Add(creature);
+      CryptidController.AddCreature(creatureName, location);
     }
 
     static void QuitProgramMessage()
