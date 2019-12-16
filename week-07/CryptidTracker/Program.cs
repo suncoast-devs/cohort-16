@@ -7,7 +7,9 @@ namespace CryptidTracker
   class Program
   {
 
-    static List<Cryptid> CreatureSightings = new List<Cryptid>();
+    // static List<Cryptid> CreatureSightings = new List<Cryptid>();
+    static DatabaseContext Db = new DatabaseContext();
+
 
     static void AddCreature()
     {
@@ -23,7 +25,15 @@ namespace CryptidTracker
       creature.DateOfLastSighting = DateTime.Now;
       creature.NumberOfSightings = 1;
 
-      CreatureSightings.Add(creature);
+      // CreatureSightings.Add(creature);
+
+      // define our database
+      // var db = new DatabaseContext();
+      // // add the new object to DbSet
+      Db.Cryptids.Add(creature);
+      // save the changes
+      Db.SaveChanges();
+
     }
 
     static void QuitProgramMessage()
@@ -33,7 +43,9 @@ namespace CryptidTracker
 
     static void ViewAll()
     {
-      DisplayListOfCryptids(CreatureSightings);
+      // defined a connection to your database
+      // var db = new DatabaseContext();
+      DisplayListOfCryptids(Db.Cryptids);
     }
 
     static void UnknownCommand()
@@ -46,7 +58,9 @@ namespace CryptidTracker
       Console.WriteLine("What are you searhing for?");
       var searchTerm = Console.ReadLine();
       // Search our list????
-      var results = CreatureSightings
+      // var db = new DatabaseContext();
+
+      var results = Db.Cryptids
             .Where(creature =>
                 creature.Name.ToLower()
                     .Contains(searchTerm.ToLower()));
@@ -60,7 +74,7 @@ namespace CryptidTracker
       Console.WriteLine("----------------");
       foreach (var creature in creatures)
       {
-        Console.WriteLine($"{creature.Name} at {creature.LastSightedAt} on {creature.DateOfLastSighting}, {creature.NumberOfSightings} times");
+        Console.WriteLine($"{creature.Id}: {creature.Name} at {creature.LastSightedAt} on {creature.DateOfLastSighting}, {creature.NumberOfSightings} times");
       }
     }
 
@@ -68,10 +82,12 @@ namespace CryptidTracker
     {
       Console.WriteLine("What do you see again?");
       var creatureName = Console.ReadLine();
-      var seenCreature = CreatureSightings
+      var seenCreature = Db.Cryptids
         .FirstOrDefault(creature => creature.Name.ToLower() == creatureName.ToLower());
       seenCreature.NumberOfSightings++;
       seenCreature.DateOfLastSighting = DateTime.UtcNow;
+      Db.SaveChanges();
+
     }
 
     static void Main(string[] args)
