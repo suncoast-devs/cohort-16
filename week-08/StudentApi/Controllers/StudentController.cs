@@ -17,5 +17,14 @@ namespace StudentApi.Controllers
       return Ok(db.Students.OrderBy(student => student.FullName));
     }
 
+    [HttpPost]
+    public ActionResult CreateStudent(Student student)
+    {
+      var db = new DatabaseContext();
+      db.Students.Add(student);
+      db.SaveChanges();
+      return Ok(student);
+    }
+
   }
 }
