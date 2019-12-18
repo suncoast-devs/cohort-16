@@ -8,6 +8,9 @@ namespace StudentApi.Models
   public partial class DatabaseContext : DbContext
   {
 
+
+    public DbSet<Student> Students { get; set; }
+
     private string ConvertPostConnectionToConnectionString(string connection)
     {
       var _connection = connection.Replace("postgres://", String.Empty);
@@ -20,8 +23,7 @@ namespace StudentApi.Models
       if (!optionsBuilder.IsConfigured)
       {
         var envConn = Environment.GetEnvironmentVariable("DATABASE_URL");
-#warning Update this connection string to point to your own database.
-        var conn = "server=localhost;database=StudentApiDatabase";
+        var conn = "server=localhost;database=StudentApiDatabase;";
         if (envConn != null)
         {
           conn = ConvertPostConnectionToConnectionString(envConn);
