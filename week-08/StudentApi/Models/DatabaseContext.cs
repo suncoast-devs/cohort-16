@@ -10,6 +10,7 @@ namespace StudentApi.Models
 
 
     public DbSet<Student> Students { get; set; }
+    public DbSet<ProgressReport> ProgressReports { get; set; }
 
     private string ConvertPostConnectionToConnectionString(string connection)
     {
