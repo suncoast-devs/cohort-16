@@ -36,6 +36,7 @@ namespace StudentApi.Controllers
     public ActionResult CreateStudent(Student student)
     {
       var db = new DatabaseContext();
+      student.Id = 0;
       db.Students.Add(student);
       db.SaveChanges();
       return Ok(student);
