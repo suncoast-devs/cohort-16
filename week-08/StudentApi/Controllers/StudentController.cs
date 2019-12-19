@@ -1,6 +1,8 @@
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using StudentApi.Models;
+using StudentApi.ViewModels;
 
 namespace StudentApi.Controllers
 {
@@ -21,14 +23,30 @@ namespace StudentApi.Controllers
     public ActionResult GetOneStudent(int id)
     {
       var db = new DatabaseContext();
-      var student = db.Students.FirstOrDefault(st => st.Id == id);
+      var student = db.Students.Include(i => i.ProgressReports).FirstOrDefault(st => st.Id == id);
       if (student == null)
       {
         return NotFound();
       }
       else
       {
-        return Ok(student);
+        // create our json object
+        var rv = new StudentDetails
+        {
+          Id = student.Id,
+          FullName = student.FullName,
+          GPA = student.GPA,
+          IsJoyful = student.IsJoyful,
+          ProgressReports = student.ProgressReports.Select(pr => new CreatedProgressReport
+          {
+            AttendanceIssues = pr.AttendanceIssues,
+            DoingWell = pr.DoingWell,
+            Improvement = pr.Improvement,
+            StudentId = pr.StudentId,
+            Id = pr.Id
+          }).ToList()
+        };
+        return Ok(rv);
       }
     }
 

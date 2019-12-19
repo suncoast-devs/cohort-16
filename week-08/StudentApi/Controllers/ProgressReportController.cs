@@ -37,8 +37,8 @@ namespace StudentApi.Controllers
           DoingWell = report.DoingWell,
           StudentId = report.StudentId,
           Improvement = report.Improvement
-        }
-      return Ok(rv);
+        };
+        return Ok(rv);
       }
     }
   }

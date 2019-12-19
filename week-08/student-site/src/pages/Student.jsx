@@ -25,6 +25,12 @@ const Student = props => {
     })
 
     console.log(resp.data)
+    setStudent(prev => {
+      return {
+        ...prev,
+        progressReports: [...prev.progressReports.concat(resp.data)],
+      }
+    })
   }
 
   useEffect(() => {
@@ -58,6 +64,24 @@ const Student = props => {
         <button onClick={sendProgressReportToApi}>
           Create Progress Report
         </button>
+      </section>
+      <section>
+        <header>old progress reports</header>
+        {student.progressReports &&
+          (student.progressReports.length > 0 ? (
+            <ul>
+              {student.progressReports.map(report => {
+                return (
+                  <li>
+                    Good: {report.doingWell}
+                    Bad: {report.improvement}
+                  </li>
+                )
+              })}
+            </ul>
+          ) : (
+            <h3>No progress reports yet</h3>
+          ))}
       </section>
     </div>
   )
