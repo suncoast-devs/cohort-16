@@ -5,15 +5,15 @@ import Page2 from './pages/Page2'
 import HomePage from './pages/HomePage'
 import NotFound from './pages/NotFound'
 import Student from './pages/Student'
+import NewStudent from './pages/NewStudent'
 
 const App = () => {
   return (
     <Router>
       <Switch>
         <Route exact path="/" component={HomePage}></Route>
+        <Route exact path="/student/new" component={NewStudent}></Route>
         <Route exact path="/student/:id" component={Student}></Route>
-        <Route exact path="/1" component={Page}></Route>
-        <Route exact path="/2" component={Page2}></Route>
         <Route path="*" component={NotFound}></Route>
       </Switch>
       <footer>
@@ -22,6 +22,9 @@ const App = () => {
           <ul>
             <li>
               <Link to="/">Go Home</Link>
+            </li>
+            <li>
+              <Link to="/student/new">Create Student</Link>
             </li>
           </ul>
         </nav>

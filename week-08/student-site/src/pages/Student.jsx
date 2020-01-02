@@ -36,6 +36,7 @@ const Student = props => {
   useEffect(() => {
     getStudent()
   }, [])
+
   return (
     <div>
       <h1>{student.fullName}</h1>

@@ -9,8 +9,12 @@ namespace StudentApi.Models
 
     [Required]
     public string FullName { get; set; }
-    public double? GPA { get; set; }
 
+    [Required]
+    public string Email { get; set; }
+    public string PhoneNumber { get; set; }
+    public string SlackName { get; set; }
+    public double? GPA { get; set; }
     public bool IsJoyful { get; set; } = true;
 
     public List<ProgressReport> ProgressReports { get; set; }
