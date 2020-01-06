@@ -12,8 +12,29 @@ namespace HikingTrailApi.Controllers
 
     // GET ALL THE TRAIL
 
+    [HttpGet]
+    public ActionResult GetAllTrails()
+    {
+      var db = new DatabaseContext();
+      return Ok(db.Trails.OrderBy(o => o.Name));
+    }
 
     // POST 
+    [HttpPost]
+    public ActionResult CreateTrail(NewTrail trail)
+    {
+      var tr = new Trail
+      {
+        Name = trail.Name,
+        ParkId = trail.ParkId,
+        Grade = trail.Grade,
+        Length = trail.Length
+      };
+      var db = new DatabaseContext();
+      db.Trails.Add(tr);
+      db.SaveChanges();
+      return Ok(tr);
+    }
 
     // SEARCH 
 
