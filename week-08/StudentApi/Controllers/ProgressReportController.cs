@@ -1,5 +1,7 @@
+using System;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using StudentApi.Models;
 using StudentApi.ViewModels;
 
@@ -9,6 +11,21 @@ namespace StudentApi.Controllers
   [Route("api/[controller]")]
   public class ProgressReportController : ControllerBase
   {
+
+    [HttpGet]
+    public ActionResult Ping()
+    {
+      return Ok(new { ponged = DateTime.UtcNow });
+    }
+
+
+    [HttpGet("test")]
+    public ActionResult Thing()
+    {
+      var db = new DatabaseContext();
+      return Ok(db.Students.Include(i => i.ProgressReports));
+    }
+
     [HttpPost]
     public ActionResult CreateProgressReport(NewProgressReportViewModel vm)
     {

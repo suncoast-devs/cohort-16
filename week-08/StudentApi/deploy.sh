@@ -1,7 +1,7 @@
-docker build -t sdg-sample-api-template .
+docker build -t sdg-student-api-16-image .
 
-docker tag sdg-sample-api-template registry.heroku.com/sdg-sample-api-template/web
+docker tag sdg-student-api-16-image registry.heroku.com/sdg-student-api-16/web
 
-docker push registry.heroku.com/sdg-sample-api-template/web
+docker push registry.heroku.com/sdg-student-api-16/web
 
-heroku container:release web -a sdg-sample-api-template
+heroku container:release web -a sdg-student-api-16
