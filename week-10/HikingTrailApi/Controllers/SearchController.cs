@@ -30,7 +30,22 @@ namespace HikingTrailApi.Controllers
             park.Zip.Contains(searchTerm) ||
             park.Address.ToLower().Contains(searchTerm.ToLower())
         );
+      var query = new SearchQuery
+      {
+        SearchTerm = searchTerm
+      };
+      db.SearchQueries.Add(query);
+      //   db.SaveChanges();
+      await db.SaveChangesAsync();
       return Ok(results);
+    }
+
+
+    [HttpGet("queries")]
+    public async Task<ActionResult> GetRecentSearchQueries()
+    {
+      var queries = db.SearchQueries.OrderByDescending(o => o.Timestamp).Take(10);
+      return Ok(queries);
     }
   }
 }

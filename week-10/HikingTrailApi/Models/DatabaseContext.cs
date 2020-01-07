@@ -10,6 +10,7 @@ namespace HikingTrailApi.Models
 
     public DbSet<Trail> Trails { get; set; }
     public DbSet<Park> Parks { get; set; }
+    public DbSet<SearchQuery> SearchQueries { get; set; }
 
     private string ConvertPostConnectionToConnectionString(string connection)
     {
