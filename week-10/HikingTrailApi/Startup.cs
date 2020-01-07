@@ -27,13 +27,17 @@ namespace HikingTrailApi
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
-      services.AddControllers();
+      services.AddControllers().AddNewtonsoftJson(
+        x =>
+          x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+        );
       services.AddCors();
       services.AddSwaggerGen(c =>
       {
         c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
       });
       services.AddDbContext<DatabaseContext>();
+
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

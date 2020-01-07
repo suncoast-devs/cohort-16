@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace HikingTrailApi.Models
 {
   public class Trail
@@ -9,6 +11,7 @@ namespace HikingTrailApi.Models
 
     public int ParkId { get; set; }
 
+    [JsonIgnore]
     public Park Park { get; set; }
 
   }

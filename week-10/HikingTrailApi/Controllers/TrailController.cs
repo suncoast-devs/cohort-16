@@ -2,6 +2,7 @@ using System.Linq;
 using HikingTrailApi.Models;
 using HikingTrailApi.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace HikingTrailApi.Controllers
 {
@@ -18,6 +19,14 @@ namespace HikingTrailApi.Controllers
       var db = new DatabaseContext();
       return Ok(db.Trails.OrderBy(o => o.Name));
     }
+
+
+    // [HttpPost]
+    // public ActionResult CreateTrailBasedOnParkName(string parkName)
+    // {
+    //   var db = new DatabaseContext();
+
+    // }
 
     // POST 
     [HttpPost]
@@ -36,13 +45,13 @@ namespace HikingTrailApi.Controllers
       return Ok(tr);
     }
 
-    // SEARCH 
+    // TODO: SEARCH 
 
     [HttpGet("{id}")]
     public ActionResult GetTrail(int id)
     {
       var db = new DatabaseContext();
-      var trail = db.Trails.FirstOrDefault(f => f.Id == id);
+      var trail = db.Trails.Include(i => i.Park).FirstOrDefault(f => f.Id == id);
       if (trail == null)
       {
         return NotFound(new NotFoundResponse
