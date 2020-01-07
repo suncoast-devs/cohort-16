@@ -1,8 +1,23 @@
 import React from 'react'
-import HelloWorld from '../components/HelloWorld'
+import { Link } from 'react-router-dom'
 
 const HomePage = () => {
-  return <HelloWorld />
+  return (
+    <>
+      <section>search bar</section>
+      <main>
+        <ul>
+          <li>
+            <Link>
+              <p>Park name</p>
+              <p>123 fake string, St Pete, Fl</p>
+              <p>state | local | national</p>
+            </Link>
+          </li>
+        </ul>
+      </main>
+    </>
+  )
 }
 
 export default HomePage

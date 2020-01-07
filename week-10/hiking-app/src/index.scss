@@ -8,5 +8,65 @@ html {
 
 body {
   margin: 0;
+  padding: 0;
   min-height: 100%;
+}
+
+// As hex codes */
+
+$color-primary-0: #315d0c; // Main Primary color */
+$color-primary-1: #6fa345;
+$color-primary-2: #4f8125;
+$color-primary-3: #1b3c00;
+$color-primary-4: #0e1f00;
+
+$color-secondary-1-0: #09482d; // Main Secondary color (1) */
+$color-secondary-1-1: #357d5e;
+$color-secondary-1-2: #1c6445;
+$color-secondary-1-3: #002e1b;
+$color-secondary-1-4: #00180e;
+
+$color-secondary-2-0: #56650d; // Main Secondary color (2) */
+$color-secondary-2-1: #9fb04b;
+$color-secondary-2-2: #7b8c28;
+$color-secondary-2-3: #364100;
+$color-secondary-2-4: #1c2200;
+
+header {
+  margin: 0;
+  padding: 0;
+  color: $color-secondary-2-1;
+  background-color: $color-primary-4;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  h1 {
+    margin: 0;
+    padding: 1rem;
+  }
+  nav {
+    width: 100%;
+  }
+  nav > ul {
+    padding: 0;
+    margin: 2rem;
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+    li > a {
+      border: 3px solid $color-primary-4;
+      padding: 1rem;
+      color: white;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 10px;
+    }
+    li a:hover {
+      border: 3px solid $color-primary-1;
+    }
+    li a.selected-link {
+      border: 3px solid $color-secondary-1-2;
+    }
+  }
 }
