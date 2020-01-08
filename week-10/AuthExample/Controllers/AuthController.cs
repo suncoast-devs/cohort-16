@@ -1,6 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.IdentityModel.Tokens;
 using System.Linq;
+using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 using AuthExample.Models;
 using AuthExample.ViewModels;
@@ -15,6 +19,7 @@ namespace AuthExample.Controllers
   [ApiController]
   public class AuthController : ControllerBase
   {
+
 
 
     private readonly DatabaseContext db;
@@ -65,7 +70,31 @@ namespace AuthExample.Controllers
 
       if (verificationResult == PasswordVerificationResult.Success)
       {
-        return Ok(user);
+        var expirationTime = DateTime.UtcNow.AddHours(10);
+
+        var tokenDescriptor = new SecurityTokenDescriptor
+        {
+          Subject = new ClaimsIdentity(new[]
+          {
+            new Claim("id", user.Id.ToString())
+        }),
+          Expires = expirationTime,
+          SigningCredentials = new SigningCredentials(
+                 new SymmetricSecurityKey(Encoding.ASCII.GetBytes("bRhYJRlZvBj2vW4MrV5HVdPgIE6VMtCFB0kTtJ1m")),
+                SecurityAlgorithms.HmacSha256Signature
+            )
+        };
+        var tokenHandler = new JwtSecurityTokenHandler();
+        var token = tokenHandler.WriteToken(tokenHandler.CreateToken(tokenDescriptor));
+
+        var rv = new AuthenticatedData
+        {
+          FullName = user.FullName,
+          Token = token,
+          UserId = user.Id,
+          Username = user.Username
+        };
+        return Ok(rv);
       }
       else
       {
