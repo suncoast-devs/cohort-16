@@ -12,6 +12,7 @@ import NotFound from './pages/NotFound'
 import Login from './pages/Login'
 import SignUp from './pages/SignUp'
 import Secret from './pages/Secret'
+import Unauthed from './pages/Unauthed'
 
 const App = () => {
   return (
@@ -30,7 +31,9 @@ const App = () => {
         <Route exact path="/" component={HomePage}></Route>
         <Route exact path="/login" component={Login}></Route>
         <Route exact path="/signup" component={SignUp}></Route>
-        <Route exact path="/secret" component={Secret}></Route>
+        <Route exact path="/secret/:username" component={Secret}></Route>
+        <Route exact path="/unauth" component={Unauthed}></Route>
+
         <Route path="*" component={NotFound}></Route>
       </Switch>
     </Router>

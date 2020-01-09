@@ -27,6 +27,8 @@ const SignUp = () => {
     e.preventDefault()
     const resp = await axios.post('https://localhost:5001/auth/signup', user)
     console.log(resp.data)
+    localStorage.setItem('token', resp.data.token)
+    localStorage.setItem('expiresAt', resp.data.expirationTime)
   }
 
   return (

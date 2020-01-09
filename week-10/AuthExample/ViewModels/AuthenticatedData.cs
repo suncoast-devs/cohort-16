@@ -1,3 +1,5 @@
+using System;
+
 namespace AuthExample.ViewModels
 {
   public class AuthenticatedData
@@ -6,5 +8,6 @@ namespace AuthExample.ViewModels
     public int UserId { get; set; }
     public string FullName { get; set; }
     public string Token { get; set; }
+    public DateTime ExpirationTime { get; set; }
   }
 }

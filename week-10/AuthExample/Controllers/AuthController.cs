@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using AuthExample.Services;
 
 namespace AuthExample.Controllers
 {
@@ -32,11 +33,21 @@ namespace AuthExample.Controllers
     [HttpPost("signup")]
     public async Task<ActionResult> SignUpUser(NewUserModel userData)
     {
+      if (userData.Email.Contains("@gmail.com"))
+      {
+        return BadRequest(new { Message = "Sorry, no google accounts" });
+      }
 
       var existingUser = await this.db.Users.FirstOrDefaultAsync(f => f.Username == userData.Username);
       if (existingUser != null)
       {
         return BadRequest(new { Message = "user already exists" });
+      }
+
+      var existingUserEmail = await this.db.Users.FirstOrDefaultAsync(f => f.Email == userData.Email);
+      if (existingUserEmail != null)
+      {
+        return BadRequest(new { Message = "email address is already exists" });
       }
 
       var user = new User
@@ -53,7 +64,8 @@ namespace AuthExample.Controllers
 
       this.db.Users.Add(user);
       await this.db.SaveChangesAsync();
-      return Ok(user);
+      var rv = new AuthService().CreateToken(user);
+      return Ok(rv);
     }
 
 
@@ -70,30 +82,7 @@ namespace AuthExample.Controllers
 
       if (verificationResult == PasswordVerificationResult.Success)
       {
-        var expirationTime = DateTime.UtcNow.AddHours(10);
-
-        var tokenDescriptor = new SecurityTokenDescriptor
-        {
-          Subject = new ClaimsIdentity(new[]
-          {
-            new Claim("id", user.Id.ToString()),
-      }),
-          Expires = expirationTime,
-          SigningCredentials = new SigningCredentials(
-                 new SymmetricSecurityKey(Encoding.ASCII.GetBytes("bRhYJRlZvBj2vW4MrV5HVdPgIE6VMtCFB0kTtJ1m")),
-                SecurityAlgorithms.HmacSha256Signature
-            )
-        };
-        var tokenHandler = new JwtSecurityTokenHandler();
-        var token = tokenHandler.WriteToken(tokenHandler.CreateToken(tokenDescriptor));
-
-        var rv = new AuthenticatedData
-        {
-          FullName = user.FullName,
-          Token = token,
-          UserId = user.Id,
-          Username = user.Username
-        };
+        var rv = new AuthService().CreateToken(user);
         return Ok(rv);
       }
       else
