@@ -76,8 +76,8 @@ namespace AuthExample.Controllers
         {
           Subject = new ClaimsIdentity(new[]
           {
-            new Claim("id", user.Id.ToString())
-        }),
+            new Claim("id", user.Id.ToString()),
+      }),
           Expires = expirationTime,
           SigningCredentials = new SigningCredentials(
                  new SymmetricSecurityKey(Encoding.ASCII.GetBytes("bRhYJRlZvBj2vW4MrV5HVdPgIE6VMtCFB0kTtJ1m")),
