@@ -1,12 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk.Web">
-
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>60b3fb88-cbf8-40c0-9603-d440fe5deb97</UserSecretsId>
   </PropertyGroup>
-
-  <ItemGroup>
-  </ItemGroup>
-
+  <ItemGroup></ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.0.0-rc4" />
@@ -20,5 +18,4 @@
     </PackageReference>
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="5.6.0" />
   </ItemGroup>
-
 </Project>

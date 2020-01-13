@@ -3,12 +3,21 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using AuthExample.ViewModels;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
 namespace AuthExample.Services
 {
   public class AuthService
   {
+
+    private readonly string KEY;
+
+    public AuthService(IConfiguration configuration)
+    {
+      KEY = configuration["JWT-KEY"];
+    }
+
     public AuthenticatedData CreateToken(Models.User user)
     {
       var expirationTime = DateTime.UtcNow.AddHours(10);
@@ -21,7 +30,7 @@ namespace AuthExample.Services
       }),
         Expires = expirationTime,
         SigningCredentials = new SigningCredentials(
-               new SymmetricSecurityKey(Encoding.ASCII.GetBytes("bRhYJRlZvBj2vW4MrV5HVdPgIE6VMtCFB0kTtJ1m")),
+               new SymmetricSecurityKey(Encoding.ASCII.GetBytes(this.KEY)),
               SecurityAlgorithms.HmacSha256Signature
           )
       };
