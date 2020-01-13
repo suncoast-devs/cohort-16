@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AuthExample.Services;
+using Microsoft.Extensions.Configuration;
 
 namespace AuthExample.Controllers
 {
@@ -25,9 +26,12 @@ namespace AuthExample.Controllers
 
     private readonly DatabaseContext db;
 
-    public AuthController(DatabaseContext context)
+    private readonly IConfiguration configuration;
+
+    public AuthController(DatabaseContext context, IConfiguration config)
     {
       this.db = context;
+      this.configuration = config;
     }
 
     [HttpPost("signup")]
@@ -64,7 +68,7 @@ namespace AuthExample.Controllers
 
       this.db.Users.Add(user);
       await this.db.SaveChangesAsync();
-      var rv = new AuthService().CreateToken(user);
+      var rv = new AuthService(this.configuration).CreateToken(user);
       return Ok(rv);
     }
 
@@ -82,7 +86,7 @@ namespace AuthExample.Controllers
 
       if (verificationResult == PasswordVerificationResult.Success)
       {
-        var rv = new AuthService().CreateToken(user);
+        var rv = new AuthService(this.configuration).CreateToken(user);
         return Ok(rv);
       }
       else

@@ -27,6 +27,9 @@ namespace AuthExample.Services
         Subject = new ClaimsIdentity(new[]
         {
             new Claim("id", user.Id.ToString()),
+            new Claim(ClaimTypes.Name, user.Username),
+            new Claim(ClaimTypes.NameIdentifier, user.Username)
+
       }),
         Expires = expirationTime,
         SigningCredentials = new SigningCredentials(
