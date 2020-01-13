@@ -48,7 +48,7 @@ namespace AuthExample
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
 
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("bRhYJRlZvBj2vW4MrV5HVdPgIE6VMtCFB0kTtJ1m"))
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Configuration["JWT-KEY"]))
                   };
                 });
 
